@@ -48,7 +48,7 @@ gcloud container clusters get-credentials <cluster_name> --zone <cluster_zone --
 ```
 
 or you can do that from gcp console itself
-![[images/gke_exec.png]]
+![alt text](images/gke_exec.png)
 on the bash shell execute
 
 ```
