@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: openmetadata-dependencies-dags-pv
+  #annotations:
+  #  pv.beta.kubernetes.io/gid: "0"
+spec:
+  capacity:
+    storage: 11Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: nfs-server.default.svc.cluster.local
+    path: "/"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    meta.helm.sh/release-name: openmetadata-dependencies
+    meta.helm.sh/release-namespace: default
+    volume.beta.kubernetes.io/storage-provisioner: pd.csi.storage.gke.io
+  creationTimestamp: "2022-07-24T19:31:35Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  labels:
+    app: airflow
+    app.kubernetes.io/managed-by: Helm
+    chart: airflow-8.5.3
+    heritage: Helm
+    release: openmetadata-dependencies
+  name: openmetadata-dependencies-dags
+  namespace: default
+  resourceVersion: "3978"
+  uid: 903a7715-bef5-4145-a561-91e902d7df64
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ""
+

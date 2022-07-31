@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: openmetadata-dependencies-logs-pv
+spec:
+  capacity:
+    storage: 11Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: nfs-server.default.svc.cluster.local
+    path: "/"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    meta.helm.sh/release-name: openmetadata-dependencies
+    meta.helm.sh/release-namespace: default
+    volume.beta.kubernetes.io/storage-provisioner: pd.csi.storage.gke.io
+  creationTimestamp: "2022-07-24T19:31:35Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  labels:
+    app: airflow
+    app.kubernetes.io/managed-by: Helm
+    chart: airflow-8.5.3
+    heritage: Helm
+    release: openmetadata-dependencies
+  name: openmetadata-dependencies-logs
+  namespace: default
+  resourceVersion: "3979"
+  uid: 3d1b0313-9ebc-487d-9f69-4582b0ea0b78
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ""
